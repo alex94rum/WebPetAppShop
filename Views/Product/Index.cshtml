@@ -1,0 +1,15 @@
+﻿@model Product;
+
+<div class="row">
+    <div class="col-6">
+        <img src=@Model.ImagePath class="card-img-top" alt="Изображение товара" style="width: 400px; height: 400px; padding: 10px">
+    </div>
+
+    <div class="col-6">
+        <h3>@Model.Name</h3>
+        <h5>@Model.Cost$</h5>
+        <h5>@Model.Description</h5>
+        <a class="btn btn-dark" href="/cart/add?productId=@Model.Id" role="button">Добавить в карзину</a>
+        <a class="btn btn-dark" href="/home/index/" role="button">Продолжить покупки</a>
+    </div>
+</div>
