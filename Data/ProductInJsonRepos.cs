@@ -4,23 +4,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using WebPetAppShop.Extensions;
+using WebPetAppShop.Models;
 
-namespace WebPetAppShop.Models
+namespace WebPetAppShop.Data
 {
-    public class ProductRepos
+    public class ProductInJsonRepos : IProductRepos
     {
-        public List<Product>? Products { get; }
-
-        public ProductRepos()
+        public List<Product>? GetAll()
         {
             var path = @"D:\CSharp_folder\WebPetAppShop\WebPetAppShop\Products.json";
             string json = System.IO.File.ReadAllText(path);
-            this.Products = JsonConvert.DeserializeObject<List<Product>>(json);
+
+            return JsonConvert.DeserializeObject<List<Product>>(json);
         }
 
         public Product? TryByGuid(Guid guid)
         {
-            return this.Products?.FirstOrDefault(x => x.Id == guid);
+            return this.GetAll()?.FirstOrDefault(x => x.Id == guid);
         }
+
     }
 }

@@ -1,16 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using WebPetAppShop.Models;
+using WebPetAppShop.Data;
 
 namespace WebPetAppShop.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ProductRepos productRepos;
+        private readonly IProductRepos productRepos;
 
-        public ProductController()
+        public ProductController(IProductRepos productRepos)
         {
-            this.productRepos = new ProductRepos();
+            this.productRepos = productRepos;
         }
 
         public IActionResult Index(Guid guid)

@@ -1,11 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebPetAppShop.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<IProductRepos, ProductInJsonRepos>();
+builder.Services.AddSingleton<ICartRepos, CartInMamoryRepos>();
+builder.Services.AddSingleton<IOrderRepos, OrderInMamoryRepos>();
 
 var app = builder.Build();
 

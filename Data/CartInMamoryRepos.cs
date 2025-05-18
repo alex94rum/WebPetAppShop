@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WebPetAppShop.Models;
 
-namespace WebPetAppShop.Models
+namespace WebPetAppShop.Data
 {
-    public static class CartRepos
+    public class CartInMamoryRepos : ICartRepos
     {
-        private static List<Cart> carts = new List<Cart>();
+        private List<Cart> carts = new List<Cart>();
 
-        public static Cart? TyGetByUserId(string userId)
+        public Cart? TyGetByUserId(string userId)
         {
             return carts?.FirstOrDefault(c => c.UserId == userId);
         }
 
-        public static void Add(Product? product, string userId)
+        public void Add(Product? product, string userId)
         {
             Cart? existCart = TyGetByUserId(userId);
 
@@ -52,6 +53,34 @@ namespace WebPetAppShop.Models
                         Product = product,
                     });
                 }
+            }
+        }
+
+        public void DecreasItem(Guid productId, string userId)
+        {
+            Cart? existCart = TyGetByUserId(userId);
+            CartItem? existCarItem = existCart?.Items?.FirstOrDefault(x => x?.Product?.Id == productId);
+
+            if (existCarItem == null)
+            {
+                return;
+            }
+            
+            existCarItem.Amount -= 1;
+
+            if (existCarItem?.Amount == 0)
+            {
+                existCart?.Items?.Remove(existCarItem);
+            }
+        }
+
+        public void Clear(string userId)
+        {
+            Cart? existCart = TyGetByUserId(userId);
+
+            if (existCart != null)
+            {
+                carts.Remove(existCart);
             }
         }
     }

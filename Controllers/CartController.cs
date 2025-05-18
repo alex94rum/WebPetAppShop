@@ -1,21 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using WebPetAppShop.Models;
+using WebPetAppShop.Data;
 
 namespace WebPetAppShop.Controllers
 {
     public class CartController : Controller
     {
-        private readonly ProductRepos productRepos;
+        private readonly IProductRepos productRepos;
+        private readonly ICartRepos cartRepos;
 
-        public CartController()
+        public CartController(IProductRepos productRepos, ICartRepos cartRepos)
         {
-            this.productRepos = new ProductRepos();
+            this.productRepos = productRepos;
+            this.cartRepos = cartRepos;
         }
 
         public IActionResult Index()
         {
-            var cart = CartRepos.TyGetByUserId(Constans.UserId);
+            var cart = this.cartRepos.TyGetByUserId(Constans.UserId);
 
             return View("Index", cart);
         }
@@ -23,10 +25,23 @@ namespace WebPetAppShop.Controllers
         public IActionResult Add(Guid productId)
         {
             var product = this.productRepos.TryByGuid(productId);
-            CartRepos.Add(product, Constans.UserId);
+            this.cartRepos.Add(product, Constans.UserId);
 
             return RedirectToAction("Index"); // повторный вызов Index
         }
 
+        public IActionResult DecreasItemAmount(Guid productId)
+        {
+            this.cartRepos.DecreasItem(productId, Constans.UserId);
+
+            return RedirectToAction("Index"); // повторный вызов Index
+        }
+
+        public IActionResult Clear(Guid productId)
+        {
+            this.cartRepos.Clear(Constans.UserId);
+
+            return RedirectToAction("Index"); // повторный вызов Index
+        }
     }
 }
