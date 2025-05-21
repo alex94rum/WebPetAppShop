@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebPetAppShop.Data;
+using WebPetAppShop.Models;
 
 namespace WebPetAppShop.Controllers
 {
@@ -19,8 +20,8 @@ namespace WebPetAppShop.Controllers
             return View();
         }
 
-
-        public IActionResult Buy()
+        [HttpPost]
+        public IActionResult Buy(Order order)
         {
             var existCart = this.cartRepos.TyGetByUserId(Constans.UserId);
 

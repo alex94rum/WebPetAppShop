@@ -1,17 +1,19 @@
-﻿<div class="row text-center">
-    <div class="col">
-        <div>
-            <input type="text" placeholder="ФИО" />
+﻿ <form method="post">
+    <div class="row text-center">
+        <div class="col">
+            <div>
+                <input type="text" placeholder="ФИО" name="name"/>
+            </div>
+            <br />
+            <div>
+                <input type="text" placeholder="Адресс" name="adress"/>
+            </div>
+            <br />
+            <div>
+                <input type="text" placeholder="Телефон" name="phone"/>
+            </div>
+            <br />
+            <button class="btn btn-success" type="submit" asp-controller="Order" asp-action="Buy">Оформить заказ</button>
         </div>
-        <br />
-        <div>
-            <input type="text" placeholder="Адресс" />
-        </div>
-        <br />
-        <div>
-            <input type="text" placeholder="Телефон" />
-        </div>
-        <br />
-        <a class="btn btn-success" href="/order/buy" role="button">Оформить заказ</a>
     </div>
-</div>
+ </form>   
