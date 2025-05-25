@@ -7,11 +7,11 @@ namespace WebPetAppShop.Data
 {
     public class OrderInMamoryRepos : IOrderRepos
     {
-        private List<Cart> orders = new List<Cart>();
+        private List<Order> orders = new List<Order>();
 
-        public void Add(Cart cart)
+        public void Add(Order order)
         {
-            this.orders.Add(cart);
+            this.orders.Add(order);
         }
     }
 }

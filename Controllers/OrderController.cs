@@ -21,13 +21,19 @@ namespace WebPetAppShop.Controllers
         }
 
         [HttpPost]
-        public IActionResult Buy(Order order)
+        public IActionResult Buy(UserDeliveryInfo userInfo)
         {
             var existCart = this.cartRepos.TyGetByUserId(Constans.UserId);
 
+            var order = new Order()
+            {
+                UserInfo = userInfo,
+                Items = existCart?.Items,
+            };
+
             if (existCart != null)
             {
-                this.orderRepos.Add(existCart);
+                this.orderRepos.Add(order);
             }
 
             this.cartRepos.Clear(Constans.UserId);

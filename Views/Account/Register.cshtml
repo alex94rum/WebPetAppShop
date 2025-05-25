@@ -1,0 +1,21 @@
+﻿<form method="post">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-6 text-center">
+            <div>
+                <h3>Регистрация</h3>
+            </div>
+            <div >
+                <input class="form-control" type="text" placeholder="Логин" name="username" />
+            </div>
+            <br />
+            <div>
+                <input class="form-control" type="password" placeholder="Пароль" name="password" />
+            </div>
+            <div>
+                <input class="form-control" type="password" placeholder="Подтвердите пароль" name="confirmpassword" />
+            </div>
+            <br />
+            <button class="btn btn-success w-75" type="submit" asp-controller="Account" asp-action="Register">Зарегистрироваться</button>
+        </div>
+    </div>
+</form> 

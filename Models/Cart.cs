@@ -16,7 +16,15 @@ namespace WebPetAppShop.Models
         {
             get
             {
-                return this.Items?.Sum(x => x.Cost) ?? 0; 
+                return this.Items?.Sum(x => x.Cost) ?? 0;
+            }
+        }
+
+        public decimal Amount
+        {
+            get
+            {
+                return this.Items?.Sum(x => x.Amount) ?? 0;
             }
         }
     }

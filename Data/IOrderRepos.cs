@@ -4,6 +4,6 @@ namespace WebPetAppShop.Data
 {
     public interface IOrderRepos
     {
-        void Add(Cart cart);
+        void Add(Order order);
     }
 }
