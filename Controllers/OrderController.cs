@@ -23,6 +23,11 @@ namespace WebPetAppShop.Controllers
         [HttpPost]
         public IActionResult Buy(UserDeliveryInfo userInfo)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("Index", userInfo);
+            }
+
             var existCart = this.cartRepos.TyGetByUserId(Constans.UserId);
 
             var order = new Order()
