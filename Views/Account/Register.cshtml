@@ -1,20 +1,33 @@
-﻿<form method="post">
+﻿@model Register
+
+<form method="post">
     <div class="row justify-content-center align-items-center">
         <div class="col-6 text-center">
             <div>
                 <h3>Регистрация</h3>
             </div>
+
+            <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+
             <div >
-                <input class="form-control" type="text" placeholder="Логин" name="username" />
+                <input class="form-control" asp-for="UserName" placeholder="Логин" />
+                <span asp-validation-for="UserName" />
             </div>
             <br />
+
             <div>
-                <input class="form-control" type="password" placeholder="Пароль" name="password" />
-            </div>
-            <div>
-                <input class="form-control" type="password" placeholder="Подтвердите пароль" name="confirmpassword" />
+                <input class="form-control" asp-for="Password" placeholder="Пароль" />
+                <span asp-validation-for="Password" />
             </div>
             <br />
+
+            <div>
+                <input class="form-control" asp-for="ConfirmPassword" placeholder="Подтвердите пароль" />
+                <span asp-validation-for="ConfirmPassword" />
+
+            </div>
+            <br />
+
             <button class="btn btn-success w-75" type="submit" asp-controller="Account" asp-action="Register">Зарегистрироваться</button>
         </div>
     </div>
