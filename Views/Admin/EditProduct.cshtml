@@ -1,0 +1,46 @@
+﻿@model Product
+
+<form method="post">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-6 text-center">
+            <div>
+                <h3>Редактирование продукта</h3>
+            </div>
+
+            <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+
+            <input type="hidden" name="Id" value="@Model?.Id" />
+
+            <div>
+                <label asp-for="Name">Имя</label><br />
+                <input class="form-control" asp-for="Name" value="@Model?.Name" />
+                <span asp-validation-for="Name"/>
+            </div>
+            <br />
+
+            <div>
+                <label asp-for="Description">Описание</label><br />
+                <input class="form-control" asp-for="Description" value="@Model?.Description" />
+                <span asp-validation-for="Description" />
+            </div>
+            <br />
+
+            <div>
+                <label asp-for="Cost">Цена</label><br />
+                <input class="form-control" type="number" asp-for="Cost" value="@Model?.Cost" />
+                <span asp-validation-for="Cost" />
+
+            </div>
+            <br />
+
+            <div>
+                <label asp-for="ImagePath">Путь к картинке</label><br />
+                <input class="form-control" asp-for="ImagePath" value="@Model?.ImagePath" />
+                <span asp-validation-for="ImagePath" />
+            </div>
+            <br />
+
+            <button class="btn btn-success w-75" type="submit" asp-controller="Admin" asp-action="EditProduct">Обновить</button>
+        </div>
+    </div>
+</form> 

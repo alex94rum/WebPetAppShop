@@ -1,65 +1,65 @@
 [
-	{
-		"Id": "7951118d-f33c-4fc3-8750-179176f5d10d",
-		"Name": "Курс C#",
-		"Cost": 100.0,
-		"Description": "Курс по базовым основам языка программирования C#",
-		"ImagePath": "/images/c-sharp.png"
-	},
-	{
-		"Id": "0E712E73-8FF8-40D9-8E24-29B2E6EE1A68",
-		"Name": "Курс ASP.NET Core",
-		"Cost": 100.0,
-		"Description": "Курс по базовым основам фреймворка ASP.NET Core",
-		"ImagePath": "/images/asp.png"
-	},
-	{
-		"Id": "8951118d-f33c-4fc3-8750-179176f5d10d",
-		"Name": "Курс C++",
-		"Cost": 90.0,
-		"Description": "Курс по базовым основам языка программирования C++",
-		"ImagePath": "/images/c-.png"
-	},
-	{
-		"Id": "1763BFDA-A976-43B2-BA15-211D5E8A222F",
-		"Name": "Курс Python",
-		"Cost": 90.0,
-		"Description": "Курс по базовым основам языка программирования Python",
-		"ImagePath": "/images/python.png"
-	},
-	{
-		"Id": "EFEC87E7-BE09-4750-812A-3AD3283F7BC7",
-		"Name": "Курс Java",
-		"Cost": 80.0,
-		"Description": "Курс по базовым основам языка программирования Java",
-		"ImagePath": "/images/java.png"
-	},
-	{
-		"Id": "54125D3D-0A0F-4C12-8245-5B2772FB05D7",
-		"Name": "Курс JavaScript",
-		"Cost": 70.0,
-		"Description": "Курс по базовым основам языка программирования JavaScript",
-		"ImagePath": "/images/js.png"
-	},
-	{
-		"Id": "44CD009E-42E3-4487-9018-B12F0DE09E16",
-		"Name": "Курс Ruby",
-		"Cost": 70.0,
-		"Description": "Курс по базовым основам языка программирования Ruby",
-		"ImagePath": "/images/ruby.png"
-	},
-	{
-		"Id": "483887C9-397A-43E9-A0C3-DA6D29AD867C",
-		"Name": "Курс Swift",
-		"Cost": 70.0,
-		"Description": "Курс по базовым основам языка программирования Swift",
-		"ImagePath": "/images/swift.png"
-	},
-	{
-		"Id": "204DC83D-6394-4DCB-A58E-3E9F17D39EA3",
-		"Name": "Курс PHP",
-		"Cost": 10.0,
-		"Description": "Курс по базовым основам языка программирования PHP",
-		"ImagePath": "/images/php.png"
-	}
+  {
+    "Id": "7951118d-f33c-4fc3-8750-179176f5d10d",
+    "Name": "Курс C#",
+    "Cost": 100.0,
+    "Description": "Курс по базовым основам языка программирования C#",
+    "ImagePath": "/images/c-sharp.png"
+  },
+  {
+    "Id": "0e712e73-8ff8-40d9-8e24-29b2e6ee1a68",
+    "Name": "Курс ASP.NET Core",
+    "Cost": 100.0,
+    "Description": "Курс по базовым основам фреймворка ASP.NET Core",
+    "ImagePath": "/images/asp.png"
+  },
+  {
+    "Id": "8951118d-f33c-4fc3-8750-179176f5d10d",
+    "Name": "Курс C++",
+    "Cost": 90.0,
+    "Description": "Курс по базовым основам языка программирования C++",
+    "ImagePath": "/images/c-.png"
+  },
+  {
+    "Id": "1763bfda-a976-43b2-ba15-211d5e8a222f",
+    "Name": "Курс Python",
+    "Cost": 90.0,
+    "Description": "Курс по базовым основам языка программирования Python",
+    "ImagePath": "/images/python.png"
+  },
+  {
+    "Id": "efec87e7-be09-4750-812a-3ad3283f7bc7",
+    "Name": "Курс Java",
+    "Cost": 80.0,
+    "Description": "Курс по базовым основам языка программирования Java",
+    "ImagePath": "/images/java.png"
+  },
+  {
+    "Id": "54125d3d-0a0f-4c12-8245-5b2772fb05d7",
+    "Name": "Курс JavaScript",
+    "Cost": 70.0,
+    "Description": "Курс по базовым основам языка программирования JavaScript",
+    "ImagePath": "/images/js.png"
+  },
+  {
+    "Id": "44cd009e-42e3-4487-9018-b12f0de09e16",
+    "Name": "Курс Ruby",
+    "Cost": 70.0,
+    "Description": "Курс по базовым основам языка программирования Ruby",
+    "ImagePath": "/images/ruby.png"
+  },
+  {
+    "Id": "483887c9-397a-43e9-a0c3-da6d29ad867c",
+    "Name": "Курс Swift",
+    "Cost": 70.0,
+    "Description": "Курс по базовым основам языка программирования Swift",
+    "ImagePath": "/images/swift.png"
+  },
+  {
+    "Id": "204dc83d-6394-4dcb-a58e-3e9f17d39ea3",
+    "Name": "Курс PHP",
+    "Cost": 10.0,
+    "Description": "Курс по базовым основам языка программирования PHP",
+    "ImagePath": "/images/php.png"
+  }
 ]

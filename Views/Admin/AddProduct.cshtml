@@ -1,0 +1,40 @@
+﻿@model Product
+
+<form method="post">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-6 text-center">
+            <div>
+                <h3>Создание нового продукта</h3>
+            </div>
+
+            <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+
+            <div>
+                <input class="form-control" asp-for="Name" placeholder="Название" />
+                <span asp-validation-for="Name"/>
+            </div>
+            <br />
+
+            <div>
+                <input class="form-control" asp-for="Description" placeholder="Описание" />
+                <span asp-validation-for="Description" />
+            </div>
+            <br />
+
+            <div>
+                <input class="form-control" asp-for="Cost" placeholder="Цена" />
+                <span asp-validation-for="Cost" />
+
+            </div>
+            <br />
+
+            <div>
+                <input type="file" class="form-control" asp-for="ImagePath" placeholder="Изображение" accept="image/*" />
+                <span asp-validation-for="ImagePath" />
+            </div>
+            <br />
+
+            <button class="btn btn-success w-75" type="submit" asp-controller="Admin" asp-action="AddProduct">Создать</button>
+        </div>
+    </div>
+</form> 
