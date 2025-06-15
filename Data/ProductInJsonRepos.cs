@@ -10,10 +10,11 @@ namespace WebPetAppShop.Data
 {
     public class ProductInJsonRepos : IProductRepos
     {
+        private readonly string jsonPath = @"D:\CSharp_folder\WebPetAppShop\WebPetAppShop\Products.json";
+
         public List<Product>? GetAll()
         {
-            var path = @"D:\CSharp_folder\WebPetAppShop\WebPetAppShop\Products.json";
-            string json = System.IO.File.ReadAllText(path);
+            string json = System.IO.File.ReadAllText(this.jsonPath);
 
             return JsonConvert.DeserializeObject<List<Product>>(json);
         }
@@ -32,11 +33,9 @@ namespace WebPetAppShop.Data
 
             productRepos?.Add(product);
 
-            var path = @"D:\CSharp_folder\WebPetAppShop\WebPetAppShop\Products.json";
-
             string json = JsonConvert.SerializeObject(productRepos, Formatting.Indented);
 
-            System.IO.File.WriteAllText(path, json);
+            System.IO.File.WriteAllText(this.jsonPath, json);
         }
 
         public void Update(Product product)
@@ -55,11 +54,9 @@ namespace WebPetAppShop.Data
             exstingProduct.Description = product.Description;
             exstingProduct.ImagePath = product.ImagePath;
 
-            var path = @"D:\CSharp_folder\WebPetAppShop\WebPetAppShop\Products.json";
-
             string json = JsonConvert.SerializeObject(productRepos, Formatting.Indented);
 
-            System.IO.File.WriteAllText(path, json);
+            System.IO.File.WriteAllText(this.jsonPath, json);
         }
     }
 }

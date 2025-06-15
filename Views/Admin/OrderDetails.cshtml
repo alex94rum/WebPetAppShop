@@ -1,0 +1,51 @@
+﻿@model Order
+
+<form method="post">
+    <div class="row">
+        @await Html.PartialAsync("AdminLeftMenu")
+
+        <div class="col-6">
+            <h3>Заказ №@Model.Number</h3>
+
+            <table class="table">
+
+                <tr>
+                    <td>Дата и время</td>
+                    <td>@Model?.CreatedDataTime</td>
+                </tr>
+                <tr>
+                    <td>Адрес доставки</td>
+                    <td>@Model?.UserInfo?.Adress</td>
+                </tr>
+                <tr>
+                    <td>Получатель</td>
+                    <td>@Model?.UserInfo?.Name</td>
+                </tr>
+                <tr>
+                    <td>Телефон</td>
+                    <td>@Model?.UserInfo?.Phone</td>
+                </tr>
+                <tr>
+                    <td>Сумма заказа</td>
+                    <td>@Model?.Cost$</td>
+                </tr>
+                <tr>
+                    <td>Статус заказа</td>
+                    <td>
+                        <select class="form-control-color" style="width: 140px;"
+                                asp-for="@Model.Status"
+                                asp-items="@Html.GetEnumSelectList<OrderStatus>()">
+                        </select>
+                    </td>
+                </tr>
+
+
+            </table>
+            <br />
+            <button class="btn btn-success w-100" type="submit" asp-controller="Admin" asp-action="UpdateOrderStatus" asp-route-orderId="@Model.Id">Обновить статус</button>
+
+        </div>
+
+    </div>
+
+</form>
