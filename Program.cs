@@ -11,6 +11,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IProductRepos, ProductInJsonRepos>();
 builder.Services.AddSingleton<ICartRepos, CartInMamoryRepos>();
 builder.Services.AddSingleton<IOrderRepos, OrderInMamoryRepos>();
+builder.Services.AddSingleton<IRolesRepos, RolesInMamoryRepos>();
 
 var app = builder.Build();
 

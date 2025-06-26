@@ -1,16 +1,14 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Xml.Linq;
 using WebPetAppShop.Models;
 
 namespace WebPetAppShop.Data
 {
     public class ProductInJsonRepos : IProductRepos
     {
-        private readonly string jsonPath = @"D:\CSharp_folder\WebPetAppShop\WebPetAppShop\Products.json";
+        private readonly string jsonPath = @"Products.json";
 
         public List<Product>? GetAll()
         {
