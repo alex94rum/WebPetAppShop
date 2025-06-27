@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
+using System.Globalization;
 using WebPetAppShop.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +16,28 @@ builder.Services.AddSingleton<ICartRepos, CartInMamoryRepos>();
 builder.Services.AddSingleton<IOrderRepos, OrderInMamoryRepos>();
 builder.Services.AddSingleton<IRolesRepos, RolesInMamoryRepos>();
 
+// сервис локализации
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[]
+    {
+        new CultureInfo("en-US")
+    };
+    options.DefaultRequestCulture = new RequestCulture("en-US");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+});
+
+// создание логгера
+builder.Host.UseSerilog((context, configuration) => configuration
+            .ReadFrom.Configuration(context.Configuration)
+            .Enrich.WithProperty("ApplicationName", "WebPetAppShop"));
+
 var app = builder.Build();
+
+app.UseRequestLocalization(); // подключение локализации
+
+app.UseSerilogRequestLogging(); // подключение логгера
 
 // Configure the HTTP request pipeline.
 //if (!app.Environment.IsDevelopment())
@@ -25,9 +49,7 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(
