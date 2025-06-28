@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Data;
 using WebPetAppShop.Data;
 using WebPetAppShop.Models;
 
-namespace WebPetAppShop.Controllers
+namespace WebPetAppShop.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class AdminController : Controller
     {
         private readonly IProductRepos productRepos;
@@ -21,13 +21,13 @@ namespace WebPetAppShop.Controllers
 
         public IActionResult Orders()
         {
-            var orders = this.orderRepos.GetAll();
+            var orders = orderRepos.GetAll();
             return View(orders);
         }
 
         public IActionResult OrderDetails(Guid orderId, int number)
         {
-            var order = this.orderRepos.TryGetById(orderId);
+            var order = orderRepos.TryGetById(orderId);
             if (order != null)
             {
                 order.Number = number;
@@ -39,7 +39,7 @@ namespace WebPetAppShop.Controllers
         [HttpPost]
         public IActionResult UpdateOrderStatus(Guid orderId, OrderStatus status)
         {
-            this.orderRepos.UpdateStatus(orderId, status);
+            orderRepos.UpdateStatus(orderId, status);
 
             return RedirectToAction("Orders");
         }
@@ -51,13 +51,13 @@ namespace WebPetAppShop.Controllers
 
         public IActionResult Roles()
         {
-            var roles = this.rolesRepos.GetAll();
+            var roles = rolesRepos.GetAll();
             return View(roles);
         }
 
         public IActionResult RemoveRole(string name)
         {
-            this.rolesRepos.Remove(name);
+            rolesRepos.Remove(name);
 
             return RedirectToAction("Roles");
         }
@@ -70,14 +70,14 @@ namespace WebPetAppShop.Controllers
         [HttpPost]
         public IActionResult AddRole(Role role)
         {
-            if (this.rolesRepos.TryByName(role.Name) != null)
+            if (rolesRepos.TryByName(role.Name) != null)
             {
                 ModelState.AddModelError("", "Такая роль уже есть");
             }
 
             if (ModelState.IsValid)
             {
-                this.rolesRepos.Add(role);
+                rolesRepos.Add(role);
                 return RedirectToAction("Roles");
             }
 
@@ -87,7 +87,7 @@ namespace WebPetAppShop.Controllers
 
         public IActionResult Products()
         {
-            var products = this.productRepos.GetAll();
+            var products = productRepos.GetAll();
 
             return View(products);
         }
@@ -105,14 +105,14 @@ namespace WebPetAppShop.Controllers
                 return View(product);
             }
 
-            this.productRepos.Add(product);
+            productRepos.Add(product);
 
             return RedirectToAction("Products");
         }
 
         public IActionResult EditProduct(Guid productId)
         {
-            var product = this.productRepos.TryByGuid(productId);
+            var product = productRepos.TryByGuid(productId);
 
             return View(product);
         }
@@ -125,7 +125,7 @@ namespace WebPetAppShop.Controllers
                 return View(product);
             }
 
-            this.productRepos.Update(product);
+            productRepos.Update(product);
 
             return RedirectToAction("Products");
         }
