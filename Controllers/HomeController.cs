@@ -16,6 +16,6 @@ public class HomeController : Controller
     {
         var products = productRepos.GetAll();
 
-        return View("Index", products);
+        return View(nameof(Index), products);
     }
 }

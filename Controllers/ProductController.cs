@@ -17,7 +17,7 @@ namespace WebPetAppShop.Controllers
         {
             var products = this.productRepos?.TryByGuid(guid);
 
-            return View("Index", products);
+            return View(nameof(Index), products);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace WebPetAppShop.Controllers
         {
             var cart = this.cartRepos.TyGetByUserId(Constans.UserId);
 
-            return View("Index", cart);
+            return View(nameof(Index), cart);
         }
 
         public IActionResult Add(Guid productId)
@@ -27,21 +27,21 @@ namespace WebPetAppShop.Controllers
             var product = this.productRepos.TryByGuid(productId);
             this.cartRepos.Add(product, Constans.UserId);
 
-            return RedirectToAction("Index"); // повторный вызов Index
+            return RedirectToAction(nameof(Index)); // повторный вызов Index
         }
 
         public IActionResult DecreasItemAmount(Guid productId)
         {
             this.cartRepos.DecreasItem(productId, Constans.UserId);
 
-            return RedirectToAction("Index"); // повторный вызов Index
+            return RedirectToAction(nameof(Index)); // повторный вызов Index
         }
 
         public IActionResult Clear(Guid productId)
         {
             this.cartRepos.Clear(Constans.UserId);
 
-            return RedirectToAction("Index"); // повторный вызов Index
+            return RedirectToAction(nameof(Index)); // повторный вызов Index
         }
     }
 }

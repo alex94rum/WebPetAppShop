@@ -25,7 +25,7 @@ namespace WebPetAppShop.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("Index", userInfo);
+                return View(nameof(Index), userInfo);
             }
 
             var existCart = this.cartRepos.TyGetByUserId(Constans.UserId);
@@ -43,7 +43,7 @@ namespace WebPetAppShop.Controllers
 
             this.cartRepos.Clear(Constans.UserId);
 
-            return View("Buy");
+            return View(nameof(Buy));
         }
     }
 }

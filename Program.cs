@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Serilog;
 using System.Globalization;
 using WebPetAppShop.Data;
+using WebPetAppShop.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +15,7 @@ builder.Services.AddSingleton<IProductRepos, ProductInJsonRepos>();
 builder.Services.AddSingleton<ICartRepos, CartInMamoryRepos>();
 builder.Services.AddSingleton<IOrderRepos, OrderInMamoryRepos>();
 builder.Services.AddSingleton<IRolesRepos, RolesInMamoryRepos>();
+builder.Services.AddSingleton<IUsersManager, UsersManagerInMamory>();
 
 // сервис локализации
 builder.Services.Configure<RequestLocalizationOptions>(options =>
