@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using WebPetAppShop.Models;
+using WebPetAppShop.Areas.Admin.Model;
 
 namespace WebPetAppShop.Data
 {

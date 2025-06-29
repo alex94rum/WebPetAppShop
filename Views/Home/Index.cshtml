@@ -10,17 +10,13 @@
         <div class="col-3 card shadow">
             <img src=@product.ImagePath class="card-img-top" alt="Изображение товара" style="width: 300px; height: 300px; padding: 10px">
             <div class="card-body">
-                <a href="/product/index/@product.Id">
+                <a asp-area="" asp-controller="Product" asp-action="Index" asp-route-guid="@product.Id">
                     <h5>@product.Name</h5>
                 </a>
                 <h5>@product.Cost$</h5>
-                <a class="btn btn-dark" href="/cart/add?productId=@product.Id" role="button">Добавить в карзину</a>
+                <a class="btn btn-dark" asp-area="" asp-controller="Cart" asp-action="Add" asp-route-productId="@product.Id"
+                    role="button">Добавить в карзину</a>
             </div>
         </div>
     }  
-</div>
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

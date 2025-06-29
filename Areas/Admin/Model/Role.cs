@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebPetAppShop.Models
+namespace WebPetAppShop.Areas.Admin.Model
 {
     public class Role
     {

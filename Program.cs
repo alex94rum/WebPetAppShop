@@ -53,7 +53,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "MyArea",
+    name: "Area",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{guid?}");
 
 app.MapControllerRoute(

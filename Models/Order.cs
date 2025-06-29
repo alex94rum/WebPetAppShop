@@ -20,16 +20,16 @@ namespace WebPetAppShop.Models
 
         public Order()
         {
-            this.Id = Guid.NewGuid();
-            this.Status = OrderStatus.Created;
-            this.CreatedDataTime = DateTime.Now;
+            Id = Guid.NewGuid();
+            Status = OrderStatus.Created;
+            CreatedDataTime = DateTime.Now;
         }
 
         public decimal Cost
         {
             get
             {
-                return this.Items?.Sum(x => x.Cost) ?? 0;
+                return Items?.Sum(x => x.Cost) ?? 0;
             }
         }
     }

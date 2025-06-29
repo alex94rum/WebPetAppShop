@@ -15,7 +15,10 @@
             </div>
             <br />
 
-            <button class="btn btn-success w-75" type="submit" asp-controller="Admin" asp-action="AddRole">Создать</button>
+            <button class="btn btn-success w-75" type="submit" 
+                    asp-area="Admin"
+                    asp-controller="Role" 
+                    asp-action="Add">Создать</button>
         </div>
     </div>
 </form> 

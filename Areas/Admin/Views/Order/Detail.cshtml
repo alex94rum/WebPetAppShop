@@ -39,10 +39,13 @@
                     </td>
                 </tr>
 
-
             </table>
             <br />
-            <button class="btn btn-success w-100" type="submit" asp-controller="Admin" asp-action="UpdateOrderStatus" asp-route-orderId="@Model.Id">Обновить статус</button>
+            <button class="btn btn-success w-100" type="submit" 
+                    asp-area="Admin"
+                    asp-controller="Order" 
+                    asp-action="UpdateOrderStatus" 
+                    asp-route-orderId="@Model.Id">Обновить статус</button>
 
         </div>
 
