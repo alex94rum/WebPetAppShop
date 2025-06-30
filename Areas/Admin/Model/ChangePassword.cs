@@ -2,14 +2,10 @@
 
 namespace WebPetAppShop.Models
 {
-    public class Register
+    public class ChangePassword
     {
         [Required]
-        [EmailAddress]
-        public string? UserName { get; set; }
-
-        [Required]
-        public string? Phone { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         [StringLength(20, MinimumLength = 6)]

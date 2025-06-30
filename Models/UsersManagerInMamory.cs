@@ -23,5 +23,14 @@ namespace WebPetAppShop.Models
         {
             this.users.Add(user);
         }
+
+        public void ChangePassword(string userName, string newPassword)
+        {
+            var account = TryGetByName(userName);
+            if (account != null)
+            {
+                account.Password = newPassword;
+            }
+        }
     }
 }

@@ -1,25 +1,58 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebPetAppShop.Data;
+using WebPetAppShop.Models;
 
 namespace WebPetAppShop.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class UserController : Controller
     {
-        private readonly IProductRepos productRepos;
-        private readonly IOrderRepos orderRepos;
-        private readonly IRolesRepos rolesRepos;
+        private readonly IUsersManager usersManager;
 
-        public UserController(IProductRepos productRepos, IOrderRepos orderRepos, IRolesRepos rolesRepos)
+        public UserController(IUsersManager usersManager)
         {
-            this.productRepos = productRepos;
-            this.orderRepos = orderRepos;
-            this.rolesRepos = rolesRepos;
+            this.usersManager = usersManager;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var userAccounts = this.usersManager.GetAll();
+            return View(userAccounts);
+        }
+
+        public IActionResult Detail(string name)
+        {
+            var userAccount = this.usersManager.TryGetByName(name);
+            return View(userAccount);
+        }
+
+        public IActionResult ChangePassword(string name)
+        {
+            var changePassword = new ChangePassword()
+            {
+                UserName = name,
+            };
+
+            return View(changePassword);
+        }
+
+        [HttpPost]
+        public IActionResult ChangePassword(ChangePassword changePassword)
+        {
+            if (changePassword.UserName == changePassword.Password)
+            {
+                ModelState.AddModelError("", "Логин и пароль не должны совпадать");
+                return View();
+            }
+
+            if (ModelState.IsValid)
+            {
+                this.usersManager.ChangePassword(changePassword.UserName, changePassword.Password);
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(ChangePassword));
         }
     }
 }

@@ -61,6 +61,7 @@ namespace WebPetAppShop.Controllers
                 this.usersManager.Add(new UserAccount()
                 {
                     Name = register.UserName,
+                    Phone = register.Phone,
                     Password = register.Password,
                 });
 

@@ -9,9 +9,15 @@
 
             <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
 
-            <div >
+            <div>
                 <input class="form-control" asp-for="UserName" placeholder="Логин" />
                 <span asp-validation-for="UserName" />
+            </div>
+            <br />
+
+            <div>
+                <input class="form-control" asp-for="Phone" placeholder="Телефон" />
+                <span asp-validation-for="Phone" />
             </div>
             <br />
 
