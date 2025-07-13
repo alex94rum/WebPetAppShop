@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WebPetAppShop.Data;
+using OnlineShop.Db;
+using WebPetAppShop.Helpers;
 
 namespace WebPetAppShop.Views.Shared.Components.Cart
 {
@@ -14,8 +15,9 @@ namespace WebPetAppShop.Views.Shared.Components.Cart
 
         public IViewComponentResult Invoke()
         {
-            var cart = cartRepos.TyGetByUserId(Constans.UserId);
-            var productCounts = cart?.Amount ?? 0;
+            var cartDb = cartRepos.TyGetByUserId(Constans.UserId);
+            var catViewModel = Mapping.ToCartViewModel(cartDb);
+            var productCounts = catViewModel?.Amount ?? 0;
 
             return View("Cart", productCounts);
         }

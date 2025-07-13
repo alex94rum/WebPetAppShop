@@ -5,28 +5,28 @@ using WebPetAppShop.Models;
 
 namespace WebPetAppShop.Data
 {
-    public class CartInMamoryRepos : ICartRepos
+    public class CartInMamoryRepos
     {
-        private List<Cart> carts = new List<Cart>();
+        private List<CartViewModel> carts = new List<CartViewModel>();
 
-        public Cart? TyGetByUserId(string userId)
+        public CartViewModel? TyGetByUserId(string userId)
         {
             return carts?.FirstOrDefault(c => c.UserId == userId);
         }
 
         public void Add(ProductViewModel? product, string userId)
         {
-            Cart? existCart = TyGetByUserId(userId);
+            CartViewModel? existCart = TyGetByUserId(userId);
 
             if (existCart == null)
             {
-                var newCart = new Cart()
+                var newCart = new CartViewModel()
                 {
                     Id = Guid.NewGuid(),
                     UserId = userId,
-                    Items = new List<CartItem>()
+                    Items = new List<CartItemViewModel>()
                     {
-                        new CartItem
+                        new CartItemViewModel
                         {
                             Id = Guid.NewGuid(),
                             Amount = 1,
@@ -46,7 +46,7 @@ namespace WebPetAppShop.Data
                 }
                 else
                 {
-                    existCart?.Items?.Add(new CartItem
+                    existCart?.Items?.Add(new CartItemViewModel
                     {
                         Id = Guid.NewGuid(),
                         Amount = 1,
@@ -58,8 +58,8 @@ namespace WebPetAppShop.Data
 
         public void DecreasItem(Guid productId, string userId)
         {
-            Cart? existCart = TyGetByUserId(userId);
-            CartItem? existCarItem = existCart?.Items?.FirstOrDefault(x => x?.Product?.Id == productId);
+            CartViewModel? existCart = TyGetByUserId(userId);
+            CartItemViewModel? existCarItem = existCart?.Items?.FirstOrDefault(x => x?.Product?.Id == productId);
 
             if (existCarItem == null)
             {
@@ -76,7 +76,7 @@ namespace WebPetAppShop.Data
 
         public void Clear(string userId)
         {
-            Cart? existCart = TyGetByUserId(userId);
+            CartViewModel? existCart = TyGetByUserId(userId);
 
             if (existCart != null)
             {

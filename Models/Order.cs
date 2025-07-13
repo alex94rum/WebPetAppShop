@@ -10,7 +10,7 @@ namespace WebPetAppShop.Models
 
         public UserDeliveryInfo? UserInfo { get; set; }
 
-        public List<CartItem>? Items { get; set; }
+        public List<CartItemViewModel>? Items { get; set; }
 
         public OrderStatus Status { get; set; }
 

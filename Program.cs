@@ -21,7 +21,7 @@ string connection = builder.Configuration.GetConnectionString("online_shop");
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
 
 builder.Services.AddTransient<IProductRepos, ProductDbRepos>();
-builder.Services.AddSingleton<ICartRepos, CartInMamoryRepos>();
+builder.Services.AddTransient<ICartRepos, CartDbRepos>();
 builder.Services.AddSingleton<IOrderRepos, OrderInMamoryRepos>();
 builder.Services.AddSingleton<IRolesRepos, RolesInMamoryRepos>();
 builder.Services.AddSingleton<IUsersManager, UsersManagerInMamory>();

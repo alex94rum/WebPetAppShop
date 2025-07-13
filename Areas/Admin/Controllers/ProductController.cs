@@ -3,7 +3,7 @@ using OnlineShop.Db.Model;
 using OnlineShop.Db;
 using System;
 using WebPetAppShop.Models;
-using System.Linq;
+using WebPetAppShop.Helpers;
 
 namespace WebPetAppShop.Areas.Admin.Controllers
 {
@@ -19,16 +19,8 @@ namespace WebPetAppShop.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var products = productRepos.GetAll()
-                .Select(
-                    p => new ProductViewModel()
-                    {
-                        Id = p.Id,
-                        Name = p.Name,
-                        Cost = p.Cost,
-                        Description = p.Description
-                    })
-                .ToList();
+            var productsDb = this.productRepos.GetAll();
+            var products = Mapping.ToProductsViewModel(productsDb);
 
             return View(products);
         }
