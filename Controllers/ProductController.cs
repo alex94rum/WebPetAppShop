@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
 using System;
-using WebPetAppShop.Data;
+using WebPetAppShop.Models;
 
 namespace WebPetAppShop.Controllers
 {
@@ -15,9 +16,18 @@ namespace WebPetAppShop.Controllers
 
         public IActionResult Index(Guid guid)
         {
-            var products = this.productRepos?.TryByGuid(guid);
+            var productDb = this.productRepos?.TryByGuid(guid);
 
-            return View(nameof(Index), products);
+            var productViewModel = new ProductViewModel
+            {
+                Id = productDb.Id,
+                Name = productDb.Name,
+                ImagePath = productDb.ImagePath,
+                Cost = productDb.Cost,
+                Description = productDb.Description,
+            };
+
+            return View(nameof(Index), productViewModel);
         }
     }
 }

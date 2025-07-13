@@ -1,4 +1,4 @@
-﻿@model List<Product>
+﻿@model List<ProductViewModel>
 
 <div class="row">
     @await Html.PartialAsync("AdminLeftMenu")
@@ -36,7 +36,7 @@
                         <td><a 
                             asp-area="Admin"
                             asp-controller="Product"
-                            asp-action="Delet" 
+                            asp-action="Remove" 
                             asp-route-productId="@Model[i].Id">Удалить</a></td>
                     </tr>
                 }

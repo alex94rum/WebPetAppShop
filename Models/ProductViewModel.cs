@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebPetAppShop.Models
 {
-    public class Product
+    public class ProductViewModel
     {
         [JsonProperty("Id")]
         public Guid Id { get; set; }

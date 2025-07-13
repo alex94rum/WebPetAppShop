@@ -6,23 +6,23 @@ using WebPetAppShop.Models;
 
 namespace WebPetAppShop.Data
 {
-    public class ProductInJsonRepos : IProductRepos
+    public class ProductInJsonRepos
     {
         private readonly string jsonPath = @"Products.json";
 
-        public List<Product>? GetAll()
+        public List<ProductViewModel>? GetAll()
         {
             string json = System.IO.File.ReadAllText(this.jsonPath);
 
-            return JsonConvert.DeserializeObject<List<Product>>(json);
+            return JsonConvert.DeserializeObject<List<ProductViewModel>>(json);
         }
 
-        public Product? TryByGuid(Guid guid)
+        public ProductViewModel? TryByGuid(Guid guid)
         {
             return this.GetAll()?.FirstOrDefault(x => x.Id == guid);
         }
 
-        public void Add(Product product)
+        public void Add(ProductViewModel product)
         {
             var productRepos = this.GetAll();
 
@@ -36,7 +36,7 @@ namespace WebPetAppShop.Data
             System.IO.File.WriteAllText(this.jsonPath, json);
         }
 
-        public void Update(Product product)
+        public void Update(ProductViewModel product)
         {
             var productRepos = this.GetAll();
 

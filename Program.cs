@@ -1,17 +1,26 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using System.Globalization;
 using WebPetAppShop.Data;
 using WebPetAppShop.Models;
+using Microsoft.EntityFrameworkCore;
+using OnlineShop.Db;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddSingleton<IProductRepos, ProductInJsonRepos>();
+// получаем строку подключения из файла конфигурации
+string connection = builder.Configuration.GetConnectionString("online_shop");
+
+// добавляем контекст DatabaseContext в качестве сервиса в приложение
+builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
+
+builder.Services.AddTransient<IProductRepos, ProductDbRepos>();
 builder.Services.AddSingleton<ICartRepos, CartInMamoryRepos>();
 builder.Services.AddSingleton<IOrderRepos, OrderInMamoryRepos>();
 builder.Services.AddSingleton<IRolesRepos, RolesInMamoryRepos>();
@@ -33,6 +42,7 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 builder.Host.UseSerilog((context, configuration) => configuration
             .ReadFrom.Configuration(context.Configuration)
             .Enrich.WithProperty("ApplicationName", "WebPetAppShop"));
+
 
 var app = builder.Build();
 

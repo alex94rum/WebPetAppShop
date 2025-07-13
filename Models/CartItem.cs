@@ -6,7 +6,7 @@ namespace WebPetAppShop.Models
     {
         public Guid Id { get; set; }
 
-        public Product? Product { get; set; }
+        public ProductViewModel? Product { get; set; }
 
         public decimal Amount { get; set; }
 

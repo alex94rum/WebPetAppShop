@@ -14,7 +14,7 @@ namespace WebPetAppShop.Data
             return carts?.FirstOrDefault(c => c.UserId == userId);
         }
 
-        public void Add(Product? product, string userId)
+        public void Add(ProductViewModel? product, string userId)
         {
             Cart? existCart = TyGetByUserId(userId);
 

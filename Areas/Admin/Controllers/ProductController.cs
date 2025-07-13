@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db.Model;
+using OnlineShop.Db;
 using System;
-using WebPetAppShop.Data;
 using WebPetAppShop.Models;
+using System.Linq;
 
 namespace WebPetAppShop.Areas.Admin.Controllers
 {
@@ -17,7 +19,16 @@ namespace WebPetAppShop.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var products = productRepos.GetAll();
+            var products = productRepos.GetAll()
+                .Select(
+                    p => new ProductViewModel()
+                    {
+                        Id = p.Id,
+                        Name = p.Name,
+                        Cost = p.Cost,
+                        Description = p.Description
+                    })
+                .ToList();
 
             return View(products);
         }
@@ -28,34 +39,69 @@ namespace WebPetAppShop.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Product product)
-        {
-            if (!ModelState.IsValid) 
-            {
-                return View(product);
-            }
-
-            productRepos.Add(product);
-
-            return RedirectToAction(nameof(Index));
-        }
-
-        public IActionResult Edit(Guid productId)
-        {
-            var product = productRepos.TryByGuid(productId);
-
-            return View(product);
-        }
-
-        [HttpPost]
-        public IActionResult Edit(Product product)
+        public IActionResult Add(ProductViewModel product)
         {
             if (!ModelState.IsValid)
             {
                 return View(product);
             }
 
-            productRepos.Update(product);
+            var productDb = new Product
+            {
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description,
+                ImagePath = product.ImagePath,
+            };
+
+            productRepos.Add(productDb);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Edit(Guid productId)
+        {
+            var productDb = productRepos.TryByGuid(productId);
+
+            var productViewModel = new ProductViewModel
+            {
+                Id = productDb.Id,
+                Name = productDb.Name,
+                Cost = productDb.Cost,
+                Description = productDb.Description,
+                ImagePath = productDb.ImagePath,
+            };
+
+            return View(productViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(ProductViewModel product)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(product);
+            }
+
+            var productDb = new Product
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description,
+                ImagePath = product.ImagePath,
+            };
+
+            productRepos.Update(productDb);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Remove(Guid productId)
+        {
+            var productDb = productRepos.TryByGuid(productId);
+
+            productRepos.Remove(productDb);
 
             return RedirectToAction(nameof(Index));
         }

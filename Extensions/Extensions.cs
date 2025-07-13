@@ -7,7 +7,7 @@ namespace WebPetAppShop.Extensions
 {
     public static class Extensions
     {
-        //public static Product? TryByGuid(this List<Product> products, Id guid)
+        //public static ProductViewModel? TryByGuid(this List<ProductViewModel> products, Id guid)
         //{
         //    return products?.FirstOrDefault(x => x.Id == guid);
         //}
