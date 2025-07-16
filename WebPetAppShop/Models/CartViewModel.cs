@@ -20,7 +20,7 @@ namespace WebPetAppShop.Models
             }
         }
 
-        public decimal Amount
+        public int Amount
         {
             get
             {

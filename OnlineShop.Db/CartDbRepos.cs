@@ -1,4 +1,5 @@
-﻿using OnlineShop.Db.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineShop.Db.Model;
 
 namespace OnlineShop.Db
 {
@@ -13,7 +14,10 @@ namespace OnlineShop.Db
 
         public Cart? TyGetByUserId(string userId)
         {
-            return this.databaseContext.Carts.FirstOrDefault(c => c.UserId == userId);
+            return this.databaseContext.Carts
+                .Include(x => x.Items)
+                .ThenInclude(x => x.Product)
+                .FirstOrDefault(c => c.UserId == userId);
         }
 
         public void Add(Product product, string userId)
@@ -25,13 +29,16 @@ namespace OnlineShop.Db
                 var newCart = new Cart()
                 {
                     UserId = userId,
-                    Items = new List<CartItem>()
+                };
+
+
+                newCart.Items = new List<CartItem>()
+                {
+                    new CartItem
                     {
-                        new CartItem
-                        {
-                            Amount = 1,
-                            Product = product,
-                        }
+                        Amount = 1,
+                        Product = product,
+                        Cart = newCart,
                     }
                 };
 
@@ -50,6 +57,7 @@ namespace OnlineShop.Db
                     {
                         Amount = 1,
                         Product = product,
+                        Cart = existCart,
                     });
                 }
             }

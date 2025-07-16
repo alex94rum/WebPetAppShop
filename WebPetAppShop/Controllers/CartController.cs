@@ -2,6 +2,7 @@
 using OnlineShop.Db;
 using System;
 using WebPetAppShop.Data;
+using WebPetAppShop.Helpers;
 using WebPetAppShop.Models;
 
 namespace WebPetAppShop.Controllers
@@ -19,25 +20,16 @@ namespace WebPetAppShop.Controllers
 
         public IActionResult Index()
         {
-            var cart = this.cartRepos.TyGetByUserId(Constans.UserId);
+            var cartDb = this.cartRepos.TyGetByUserId(Constans.UserId);
+            var cartViewModel = Mapping.ToCartViewModel(cartDb);
 
-            return View(nameof(Index), cart);
+            return View(nameof(Index), cartViewModel);
         }
 
         public IActionResult Add(Guid productId)
         {
             var productDb = this.productRepos.TryByGuid(productId);
-
-            var productViewModel = new ProductViewModel
-            {
-                Id = productDb.Id,
-                Name = productDb.Name,
-                ImagePath = productDb.ImagePath,
-                Cost = productDb.Cost,
-                Description = productDb.Description,
-            };
-
-            //this.cartRepos.Add(productViewModel, Constans.UserId);
+            this.cartRepos.Add(productDb, Constans.UserId);
 
             return RedirectToAction(nameof(Index)); // повторный вызов Index
         }

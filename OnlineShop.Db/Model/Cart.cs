@@ -7,5 +7,10 @@
         public string UserId { get; set; }
 
         public List<CartItem> Items { get; set; }
+
+        public Cart()
+        {
+            this.Items = new List<CartItem>();
+        }
     }
 }

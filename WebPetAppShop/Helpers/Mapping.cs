@@ -37,6 +37,11 @@ namespace WebPetAppShop.Helpers
 
         public static CartViewModel ToCartViewModel(Cart cartDb)
         {
+            if (cartDb == null)
+            {
+                return null;
+            }
+
             return new CartViewModel()
             {
                 Id = cartDb.Id,

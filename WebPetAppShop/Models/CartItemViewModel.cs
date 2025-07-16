@@ -8,7 +8,7 @@ namespace WebPetAppShop.Models
 
         public ProductViewModel? Product { get; set; }
 
-        public decimal Amount { get; set; }
+        public int Amount { get; set; }
 
         public decimal Cost
         {

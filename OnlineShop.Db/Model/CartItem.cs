@@ -10,6 +10,6 @@ namespace OnlineShop.Db.Model
 
         public Cart Cart { get; set; }
 
-        public decimal Amount { get; set; }
+        public int Amount { get; set; }
     }
 }
