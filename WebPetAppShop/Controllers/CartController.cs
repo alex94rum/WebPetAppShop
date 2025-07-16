@@ -37,7 +37,7 @@ namespace WebPetAppShop.Controllers
                 Description = productDb.Description,
             };
 
-            this.cartRepos.Add(productViewModel, Constans.UserId);
+            //this.cartRepos.Add(productViewModel, Constans.UserId);
 
             return RedirectToAction(nameof(Index)); // повторный вызов Index
         }

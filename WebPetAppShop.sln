@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35828.75
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebPetAppShop", "WebPetAppShop.csproj", "{7F7D18EF-1CF0-468C-8E00-BF6AB52B4A0D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebPetAppShop", "WebPetAppShop\WebPetAppShop.csproj", "{7F7D18EF-1CF0-468C-8E00-BF6AB52B4A0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShop.Db", "..\OnlineShop.Db\OnlineShop.Db.csproj", "{7D7366C9-6C4F-4B8F-AAA9-4F030DF5AADE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShop.Db", "OnlineShop.Db\OnlineShop.Db.csproj", "{7D7366C9-6C4F-4B8F-AAA9-4F030DF5AADE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

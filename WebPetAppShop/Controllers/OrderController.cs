@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
 using WebPetAppShop.Data;
 using WebPetAppShop.Models;
 
@@ -33,7 +34,7 @@ namespace WebPetAppShop.Controllers
             var order = new Order()
             {
                 UserInfo = userInfo,
-                Items = existCart?.Items,
+                //Items = existCart?.Items,
             };
 
             if (existCart != null)
