@@ -57,10 +57,11 @@
                             <p class="card-text">@product.Description</p>
 
                         </div>
-                        <div class="card-body d-flex align-items-end justify-content-center">
-                            <a class="btn btn-primary" asp-area="" asp-controller="Cart" asp-action="Add" asp-route-productId="@product.Id"
+                        <div class="card-body d-flex flex-column align-items-end justify-content-center">
+                            <a class="btn btn-primary mb-2 w-100" asp-area="" asp-controller="Cart" asp-action="Add" asp-route-productId="@product.Id"
                                role="button">Добавить в корзину</a>
-
+                            <a class="btn btn-success w-100" asp-area="" asp-controller="Favorite" asp-action="Add" asp-route-productId="@product.Id"
+                               role="button">Добавить в избранное</a>
                         </div>
                     </div>
                 </div>

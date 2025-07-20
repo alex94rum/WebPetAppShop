@@ -1,4 +1,7 @@
-﻿namespace OnlineShop.Db.Model
+﻿using System;
+using System.Collections.Generic;
+
+namespace OnlineShop.Db.Model
 {
     public class Cart
     {

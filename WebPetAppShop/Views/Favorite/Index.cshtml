@@ -1,0 +1,26 @@
+﻿@model List<ProductViewModel>
+
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100 box-shadow">
+                <a asp-area="" asp-controller="Product" asp-action="Index" asp-route-guid="@product.Id"><img class="card-img-top" src=@product.ImagePath alt="Изображение товара" /></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a asp-area="" asp-controller="Product" asp-action="Index" asp-route-guid="@product.Id">@product.Name</a>
+                    </h4>
+                    <h5>@product.Cost$</h5>
+                    <p class="card-text">@product.Description</p>
+
+                </div>
+                <div class="card-body d-flex flex-column align-items-end justify-content-center">
+                    <a class="btn btn-primary mb-2 w-100" asp-area="" asp-controller="Cart" asp-action="Add" asp-route-productId="@product.Id"
+                       role="button">Добавить в корзину</a>
+                    <a class="btn btn-danger w-100" asp-area="" asp-controller="Favorite" asp-action="Remove" asp-route-productId="@product.Id"
+                       role="button">Удалить из избранного</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

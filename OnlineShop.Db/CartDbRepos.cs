@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShop.Db
 {
