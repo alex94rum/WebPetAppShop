@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OnlineShop.Db;
+using OnlineShop.Db.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using WebPetAppShop.Models;
@@ -7,24 +9,29 @@ namespace WebPetAppShop.Data
 {
     public class OrderInMamoryRepos : IOrderRepos
     {
-        private List<Order> orders = new List<Order>();
+        private List<OrderViewModel> orders = new List<OrderViewModel>();
 
-        public void Add(Order order)
+        public void Add(OrderViewModel order)
         {
             this.orders.Add(order);
         }
 
-        public List<Order> GetAll()
+        public void Add(Order order)
+        {
+            
+        }
+
+        public List<OrderViewModel> GetAll()
         {
             return this.orders;
         }
 
-        public Order? TryGetById(Guid orderId)
+        public OrderViewModel? TryGetById(Guid orderId)
         {
             return this.orders.FirstOrDefault(x => x.Id == orderId);
         }
 
-        public void UpdateStatus(Guid orderId, OrderStatus status)
+        public void UpdateStatus(Guid orderId, OrderStatusViewModel status)
         {
             var order = this.TryGetById(orderId);
 
@@ -32,6 +39,21 @@ namespace WebPetAppShop.Data
             {
                 order.Status = status;
             }
+        }
+
+        public void UpdateStatus(Guid orderId, OrderStatus status)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Order> IOrderRepos.GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        Order IOrderRepos.TryGetById(Guid orderId)
+        {
+            throw new NotImplementedException();
         }
     } 
 }

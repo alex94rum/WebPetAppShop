@@ -49,5 +49,37 @@ namespace WebPetAppShop.Helpers
                 Items = ToCartsItemViewModel(cartDb.Items),
             };
         }
+
+        public static OrderViewModel ToOrderViewModel(Order order)
+        {
+            return new OrderViewModel
+            {
+                Id = order.Id,
+                CreatedDataTime = order.CreatedDataTime,
+                Status = (OrderStatusViewModel)(int)order.Status,
+                UserInfo = ToUserDeliveryInfoViewModel(order.UserInfo),
+                Items = ToCartsItemViewModel(order.Items),
+            };
+        }
+
+        public static UserDeliveryInfoViewModel ToUserDeliveryInfoViewModel(UserDeliveryInfo deliveryInfo)
+        {
+            return new UserDeliveryInfoViewModel
+            {
+                Name = deliveryInfo.Name,
+                Adress = deliveryInfo.Adress,
+                Phone = deliveryInfo.Phone,
+            };
+        }
+
+        public static UserDeliveryInfo ToUser(UserDeliveryInfoViewModel user)
+        {
+            return new UserDeliveryInfo
+            {
+                Name = user.Name,
+                Adress = user.Adress,
+                Phone = user.Phone,
+            };
+        }
     }
 }

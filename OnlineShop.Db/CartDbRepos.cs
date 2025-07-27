@@ -41,7 +41,7 @@ namespace OnlineShop.Db
                     {
                         Amount = 1,
                         Product = product,
-                        Cart = newCart,
+                        //Cart = newCart,
                     }
                 };
 
@@ -60,7 +60,7 @@ namespace OnlineShop.Db
                     {
                         Amount = 1,
                         Product = product,
-                        Cart = existCart,
+                        //Cart = existCart,
                     });
                 }
             }

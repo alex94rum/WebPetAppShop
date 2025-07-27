@@ -23,7 +23,7 @@ builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(c
 builder.Services.AddTransient<IProductRepos, ProductDbRepos>();
 builder.Services.AddTransient<ICartRepos, CartDbRepos>();
 builder.Services.AddTransient<IFavoriteRepos, FavoriteDbRepos>();
-builder.Services.AddSingleton<IOrderRepos, OrderInMamoryRepos>();
+builder.Services.AddTransient<IOrderRepos, OrderDbRepos>();
 builder.Services.AddSingleton<IRolesRepos, RolesInMamoryRepos>();
 builder.Services.AddSingleton<IUsersManager, UsersManagerInMamory>();
 

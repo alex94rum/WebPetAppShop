@@ -1,8 +1,8 @@
-﻿using System;
+﻿using OnlineShop.Db.Model;
+using System;
 using System.Collections.Generic;
-using WebPetAppShop.Models;
 
-namespace WebPetAppShop.Data
+namespace OnlineShop.Db
 {
     public interface IOrderRepos
     {
@@ -10,7 +10,7 @@ namespace WebPetAppShop.Data
 
         List<Order> GetAll();
 
-        Order? TryGetById(Guid orderId);
+        Order TryGetById(Guid orderId);
 
         void UpdateStatus(Guid orderId, OrderStatus status);
     }

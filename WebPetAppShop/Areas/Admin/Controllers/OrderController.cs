@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
+using OnlineShop.Db.Model;
 using System;
+using System.Linq;
 using WebPetAppShop.Data;
+using WebPetAppShop.Helpers;
 using WebPetAppShop.Models;
 
 namespace WebPetAppShop.Areas.Admin.Controllers
@@ -18,24 +22,20 @@ namespace WebPetAppShop.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var orders = orderRepos.GetAll();
-            return View(orders);
+            return View(orders.Select(Mapping.ToOrderViewModel).ToList());
         }
 
-        public IActionResult Detail(Guid orderId, int number)
+        public IActionResult Detail(Guid orderId)
         {
             var order = orderRepos.TryGetById(orderId);
-            if (order != null)
-            {
-                order.Number = number;
-            }
 
-            return View(order);
+            return View(Mapping.ToOrderViewModel(order));
         }
 
         [HttpPost]
-        public IActionResult UpdateOrderStatus(Guid orderId, OrderStatus status)
+        public IActionResult UpdateOrderStatus(Guid orderId, OrderStatusViewModel status)
         {
-            orderRepos.UpdateStatus(orderId, status);
+            this.orderRepos.UpdateStatus(orderId, (OrderStatus)(int)status);
 
             return RedirectToAction(nameof(Index));
         }

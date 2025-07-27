@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
+using OnlineShop.Db.Model;
 using WebPetAppShop.Data;
 using WebPetAppShop.Helpers;
 using WebPetAppShop.Models;
@@ -23,7 +24,7 @@ namespace WebPetAppShop.Controllers
         }
 
         [HttpPost]
-        public IActionResult Buy(UserDeliveryInfo userInfo)
+        public IActionResult Buy(UserDeliveryInfoViewModel userInfo)
         {
             if (!ModelState.IsValid)
             {
@@ -31,12 +32,11 @@ namespace WebPetAppShop.Controllers
             }
 
             var existCart = this.cartRepos.TyGetByUserId(Constans.UserId);
-            var existCartViewModel = Mapping.ToCartViewModel(existCart);
 
-            var order = new Order()
+            var order = new Order
             {
-                UserInfo = userInfo,
-                Items = existCartViewModel?.Items,
+                UserInfo = Mapping.ToUser(userInfo),
+                Items = existCart.Items,
             };
 
             if (existCart != null)

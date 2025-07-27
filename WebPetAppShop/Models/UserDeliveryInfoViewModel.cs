@@ -2,7 +2,7 @@
 
 namespace WebPetAppShop.Models
 {
-    public class UserDeliveryInfo
+    public class UserDeliveryInfoViewModel
     {
         [Required]
         public string Name { get; set; }

@@ -12,6 +12,8 @@ namespace OnlineShop.Db
 
         public DbSet<FavoriteProduct> FavoriteProducts { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) 
         { 
             Database.EnsureCreated(); // создаем бд при первом обращении

@@ -16,7 +16,6 @@ public class FavoriteController : Controller
         this.productRepos = productRepos;
     }
 
-
     public IActionResult Index()
     {
         var products = this.favoriteRepos.GetAll(Constans.UserId);
