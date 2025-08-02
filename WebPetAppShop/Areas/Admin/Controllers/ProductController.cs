@@ -20,7 +20,7 @@ namespace WebPetAppShop.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var productsDb = this.productRepos.GetAll();
-            var products = Mapping.ToProductsViewModel(productsDb);
+            var products = productsDb.ToProductsViewModel();
 
             return View(products);
         }

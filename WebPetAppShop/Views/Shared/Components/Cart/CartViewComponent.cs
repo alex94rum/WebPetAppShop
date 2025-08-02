@@ -16,7 +16,7 @@ namespace WebPetAppShop.Views.Shared.Components.Cart
         public IViewComponentResult Invoke()
         {
             var cartDb = cartRepos.TyGetByUserId(Constans.UserId);
-            var catViewModel = Mapping.ToCartViewModel(cartDb);
+            var catViewModel = cartDb.ToCartViewModel();
             var productCounts = catViewModel?.Amount ?? 0;
 
             return View("Cart", productCounts);

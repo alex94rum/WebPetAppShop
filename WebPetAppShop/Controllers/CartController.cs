@@ -21,7 +21,7 @@ namespace WebPetAppShop.Controllers
         public IActionResult Index()
         {
             var cartDb = this.cartRepos.TyGetByUserId(Constans.UserId);
-            var cartViewModel = Mapping.ToCartViewModel(cartDb);
+            var cartViewModel = cartDb.ToCartViewModel();
 
             return View(nameof(Index), cartViewModel);
         }

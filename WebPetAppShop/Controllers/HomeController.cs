@@ -16,7 +16,7 @@ public class HomeController : Controller
     public IActionResult Index(string name)
     {
         var productsDb = productRepos.GetAll();
-        var productsViewModel = Mapping.ToProductsViewModel(productsDb);
+        var productsViewModel = productsDb.ToProductsViewModel();
 
         return View(nameof(Index), productsViewModel);
     }

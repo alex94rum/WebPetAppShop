@@ -19,7 +19,7 @@ public class FavoriteController : Controller
     public IActionResult Index()
     {
         var products = this.favoriteRepos.GetAll(Constans.UserId);
-        return View(Mapping.ToProductsViewModel(products));
+        return View(products.ToProductsViewModel());
     }
 
     public IActionResult Add(Guid productId)

@@ -7,10 +7,10 @@ namespace WebPetAppShop.Helpers
 {
     public static class Mapping
     {
-        public static List<ProductViewModel> ToProductsViewModel(List<Product> productsDb) =>
+        public static List<ProductViewModel> ToProductsViewModel(this List<Product> productsDb) =>
             productsDb.Select(ToProductViewModel).ToList();
 
-        public static ProductViewModel ToProductViewModel(Product productDb)
+        public static ProductViewModel ToProductViewModel(this Product productDb)
         {
             return new ProductViewModel()
             {
@@ -22,20 +22,20 @@ namespace WebPetAppShop.Helpers
             };
         }
 
-        public static List<CartItemViewModel> ToCartsItemViewModel(List<CartItem> cartsItemDb)
+        public static List<CartItemViewModel> ToCartsItemViewModel(this List<CartItem> cartsItemDb)
         {
             return cartsItemDb
                     .Select(c => new CartItemViewModel()
                     {
                         Id = c.Id,
                         Amount = c.Amount,
-                        Product = ToProductViewModel(c.Product)
+                        Product = c.Product.ToProductViewModel()
                     })
                     .ToList();
         }
 
 
-        public static CartViewModel ToCartViewModel(Cart cartDb)
+        public static CartViewModel ToCartViewModel(this Cart cartDb)
         {
             if (cartDb == null)
             {
@@ -46,23 +46,23 @@ namespace WebPetAppShop.Helpers
             {
                 Id = cartDb.Id,
                 UserId = cartDb.UserId,
-                Items = ToCartsItemViewModel(cartDb.Items),
+                Items = cartDb.Items.ToCartsItemViewModel(),
             };
         }
 
-        public static OrderViewModel ToOrderViewModel(Order order)
+        public static OrderViewModel ToOrderViewModel(this Order order)
         {
             return new OrderViewModel
             {
                 Id = order.Id,
                 CreatedDataTime = order.CreatedDataTime,
                 Status = (OrderStatusViewModel)(int)order.Status,
-                UserInfo = ToUserDeliveryInfoViewModel(order.UserInfo),
-                Items = ToCartsItemViewModel(order.Items),
+                UserInfo = order.UserInfo.ToUserDeliveryInfoViewModel(),
+                Items = order.Items.ToCartsItemViewModel(),
             };
         }
 
-        public static UserDeliveryInfoViewModel ToUserDeliveryInfoViewModel(UserDeliveryInfo deliveryInfo)
+        public static UserDeliveryInfoViewModel ToUserDeliveryInfoViewModel(this UserDeliveryInfo deliveryInfo)
         {
             return new UserDeliveryInfoViewModel
             {
@@ -72,7 +72,7 @@ namespace WebPetAppShop.Helpers
             };
         }
 
-        public static UserDeliveryInfo ToUser(UserDeliveryInfoViewModel user)
+        public static UserDeliveryInfo ToUser(this UserDeliveryInfoViewModel user)
         {
             return new UserDeliveryInfo
             {

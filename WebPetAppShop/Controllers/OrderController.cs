@@ -35,7 +35,7 @@ namespace WebPetAppShop.Controllers
 
             var order = new Order
             {
-                UserInfo = Mapping.ToUser(userInfo),
+                UserInfo = userInfo.ToUser(),
                 Items = existCart.Items,
             };
 
