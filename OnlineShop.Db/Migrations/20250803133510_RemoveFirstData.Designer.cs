@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Db;
 
@@ -11,9 +12,11 @@ using OnlineShop.Db;
 namespace OnlineShop.Db.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20250803133510_RemoveFirstData")]
+    partial class RemoveFirstData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -133,24 +136,6 @@ namespace OnlineShop.Db.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("6498025c-cec5-43e5-8740-403fc45e9396"),
-                            Cost = 100m,
-                            Description = "Описание курса по C#",
-                            ImagePath = "/images/c-sharp.png",
-                            Name = "КУср по C#"
-                        },
-                        new
-                        {
-                            Id = new Guid("064f9892-393b-4b1b-85a5-ba611acd90df"),
-                            Cost = 99m,
-                            Description = "Описание курса по Java",
-                            ImagePath = "/images/java.png",
-                            Name = "КУср по Java"
-                        });
                 });
 
             modelBuilder.Entity("OnlineShop.Db.Model.UserDeliveryInfo", b =>
