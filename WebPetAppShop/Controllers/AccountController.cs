@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db.Model;
 using WebPetAppShop.Data;
 using WebPetAppShop.Models;
 
@@ -7,10 +9,14 @@ namespace WebPetAppShop.Controllers
     public class AccountController : Controller
     {
         private readonly IUsersManager usersManager;
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> singInManager;
 
-        public AccountController(IUsersManager usersManager)
+        public AccountController(IUsersManager usersManager, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             this.usersManager = usersManager;
+            this.userManager = userManager;
+            this.singInManager = signInManager;
         }
 
         public IActionResult Login()
@@ -21,25 +27,22 @@ namespace WebPetAppShop.Controllers
         [HttpPost]
         public IActionResult Login(Login login)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
+                var result = this.singInManager.PasswordSignInAsync(login.UserName, login.Password, login.Remember, false).Result;
+                if (result.Succeeded)
+                {
+                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Неправильный пароль");
+                }
+
                 return View();
             }
 
-            var userAccount = this.usersManager.TryGetByName(login.UserName);
-            if (userAccount == null)
-            {
-                ModelState.AddModelError("", "Такого пользователя не существует");
-                return View();
-            }
-
-            if (userAccount.Password != login.Password)
-            {
-                ModelState.AddModelError("", "Не правильный пароль");
-                return View();
-            }
-
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return View(login);
         }
 
         public IActionResult Register()

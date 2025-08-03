@@ -8,6 +8,8 @@ using WebPetAppShop.Data;
 using WebPetAppShop.Models;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db;
+using Microsoft.AspNetCore.Identity;
+using OnlineShop.Db.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,14 @@ string connection = builder.Configuration.GetConnectionString("online_shop");
 
 // добавл€ем контекст DatabaseContext в качестве сервиса в приложение
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
+
+// добавл€ем контекст IndentityContext в качестве сервиса в приложение
+builder.Services.AddDbContext<IdentityContext>(options => options.UseSqlServer(connection));
+
+// указываем тип пользовател€ и роли
+builder.Services.AddIdentity<User, IdentityRole>()
+                // устанавливаем тип хранилища - наш контекст
+                .AddEntityFrameworkStores<IdentityContext>();
 
 builder.Services.AddTransient<IProductRepos, ProductDbRepos>();
 builder.Services.AddTransient<ICartRepos, CartDbRepos>();
@@ -44,20 +54,12 @@ builder.Host.UseSerilog((context, configuration) => configuration
             .ReadFrom.Configuration(context.Configuration)
             .Enrich.WithProperty("ApplicationName", "WebPetAppShop"));
 
-
 var app = builder.Build();
 
 app.UseRequestLocalization(); // подключение локализации
-
 app.UseSerilogRequestLogging(); // подключение логгера
-
-// Configure the HTTP request pipeline.
-//if (!app.Environment.IsDevelopment())
-//{
-//    app.UseExceptionHandler("/Home/Error");
-//    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-//    app.UseHsts();
-//}
+app.UseAuthentication(); // подключение аутентификации
+app.UseAuthorization(); // подключение авторизации
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
