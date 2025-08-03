@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using System;
 using WebPetAppShop.Helpers;
 
 namespace WebPetAppShop.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private readonly IProductRepos productRepos;

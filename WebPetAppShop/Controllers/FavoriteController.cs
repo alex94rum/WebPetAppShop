@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using System;
@@ -5,6 +6,7 @@ using WebPetAppShop.Helpers;
 
 namespace WebPetAppShop.Controllers;
 
+[Authorize]
 public class FavoriteController : Controller
 {
     private readonly IFavoriteRepos favoriteRepos;

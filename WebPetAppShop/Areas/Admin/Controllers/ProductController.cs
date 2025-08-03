@@ -4,10 +4,12 @@ using OnlineShop.Db;
 using System;
 using WebPetAppShop.Models;
 using WebPetAppShop.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebPetAppShop.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area(Constants.AdminRoleName)]
+    [Authorize(Roles = Constants.AdminRoleName)]
     public class ProductController : Controller
     {
         private readonly IProductRepos productRepos;
