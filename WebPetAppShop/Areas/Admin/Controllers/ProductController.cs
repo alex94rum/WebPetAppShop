@@ -3,7 +3,8 @@ using OnlineShop.Db.Model;
 using OnlineShop.Db;
 using System;
 using WebPetAppShop.Models;
-using WebPetAppShop.Helpers;
+using AutoMapper;
+using System.Collections.Generic;
 
 namespace WebPetAppShop.Areas.Admin.Controllers
 {
@@ -11,18 +12,20 @@ namespace WebPetAppShop.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepos productRepos;
+        private readonly IMapper mapper;
 
-        public ProductController(IProductRepos productRepos)
+        public ProductController(IProductRepos productRepos, IMapper mapper)
         {
             this.productRepos = productRepos;
+            this.mapper = mapper;
         }
 
         public IActionResult Index()
         {
-            var productsDb = this.productRepos.GetAll();
-            var products = productsDb.ToProductsViewModel();
+            List<Product>? productsDb = this.productRepos.GetAll();
+            var productsViewModel = this.mapper.Map<List<ProductViewModel>>(productsDb); // маппинг моделей
 
-            return View(products);
+            return View(productsViewModel);
         }
 
         public IActionResult Add()
@@ -38,13 +41,7 @@ namespace WebPetAppShop.Areas.Admin.Controllers
                 return View(product);
             }
 
-            var productDb = new Product
-            {
-                Name = product.Name,
-                Cost = product.Cost,
-                Description = product.Description,
-                ImagePath = product.ImagePath,
-            };
+            var productDb = this.mapper.Map<Product>(product); // маппинг моделей
 
             productRepos.Add(productDb);
 
@@ -53,16 +50,8 @@ namespace WebPetAppShop.Areas.Admin.Controllers
 
         public IActionResult Edit(Guid productId)
         {
-            var productDb = productRepos.TryByGuid(productId);
-
-            var productViewModel = new ProductViewModel
-            {
-                Id = productDb.Id,
-                Name = productDb.Name,
-                Cost = productDb.Cost,
-                Description = productDb.Description,
-                ImagePath = productDb.ImagePath,
-            };
+            Product? productDb = productRepos.TryByGuid(productId);
+            var productViewModel = this.mapper.Map<ProductViewModel>(productDb); // маппинг моделей
 
             return View(productViewModel);
         }
@@ -75,16 +64,9 @@ namespace WebPetAppShop.Areas.Admin.Controllers
                 return View(product);
             }
 
-            var productDb = new Product
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Cost = product.Cost,
-                Description = product.Description,
-                ImagePath = product.ImagePath,
-            };
+            var productDb = this.mapper.Map<Product>(product); // маппинг моделей
 
-            productRepos.Update(productDb);
+            this.productRepos.Update(productDb);
 
             return RedirectToAction(nameof(Index));
         }
@@ -92,8 +74,7 @@ namespace WebPetAppShop.Areas.Admin.Controllers
         public IActionResult Remove(Guid productId)
         {
             var productDb = productRepos.TryByGuid(productId);
-
-            productRepos.Remove(productDb);
+            this.productRepos.Remove(productDb);
 
             return RedirectToAction(nameof(Index));
         }

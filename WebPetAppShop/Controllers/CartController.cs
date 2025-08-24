@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using System;
-using WebPetAppShop.Data;
-using WebPetAppShop.Helpers;
 using WebPetAppShop.Models;
 
 namespace WebPetAppShop.Controllers
@@ -11,17 +10,19 @@ namespace WebPetAppShop.Controllers
     {
         private readonly IProductRepos productRepos;
         private readonly ICartRepos cartRepos;
+        private readonly IMapper mapper;
 
-        public CartController(IProductRepos productRepos, ICartRepos cartRepos)
+        public CartController(IProductRepos productRepos, ICartRepos cartRepos, IMapper mapper)
         {
             this.productRepos = productRepos;
             this.cartRepos = cartRepos;
+            this.mapper = mapper;
         }
 
         public IActionResult Index()
         {
             var cartDb = this.cartRepos.TyGetByUserId(Constans.UserId);
-            var cartViewModel = cartDb.ToCartViewModel();
+            var cartViewModel = mapper.Map<CartViewModel>(cartDb); // маппинг моделей
 
             return View(nameof(Index), cartViewModel);
         }

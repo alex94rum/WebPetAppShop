@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using OnlineShop.Db.Model;
 using System;
-using System.Linq;
-using WebPetAppShop.Data;
-using WebPetAppShop.Helpers;
+using System.Collections.Generic;
 using WebPetAppShop.Models;
 
 namespace WebPetAppShop.Areas.Admin.Controllers
@@ -13,23 +12,28 @@ namespace WebPetAppShop.Areas.Admin.Controllers
     public class OrderController : Controller
     {
         private readonly IOrderRepos orderRepos;
+        private readonly IMapper mapper;
 
-        public OrderController(IOrderRepos orderRepos)
+        public OrderController(IOrderRepos orderRepos, IMapper mapper)
         {
             this.orderRepos = orderRepos;
+            this.mapper = mapper;
         }
 
         public IActionResult Index()
         {
             var orders = orderRepos.GetAll();
-            return View(orders.Select(Mapping.ToOrderViewModel).ToList());
+            var ordersViewModel = this.mapper.Map<List<OrderViewModel>>(orders);
+
+            return View(ordersViewModel);
         }
 
         public IActionResult Detail(Guid orderId)
         {
             var order = orderRepos.TryGetById(orderId);
+            var orderViewModel = this.mapper.Map<OrderViewModel>(order);
 
-            return View(Mapping.ToOrderViewModel(order));
+            return View(orderViewModel);
         }
 
         [HttpPost]

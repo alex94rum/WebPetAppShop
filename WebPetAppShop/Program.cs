@@ -8,6 +8,7 @@ using WebPetAppShop.Data;
 using WebPetAppShop.Models;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db;
+using WebPetAppShop.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,6 +45,8 @@ builder.Host.UseSerilog((context, configuration) => configuration
             .ReadFrom.Configuration(context.Configuration)
             .Enrich.WithProperty("ApplicationName", "WebPetAppShop"));
 
+// подключение автомаппера
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var app = builder.Build();
 

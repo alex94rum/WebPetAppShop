@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using OnlineShop.Db.Model;
-using WebPetAppShop.Data;
-using WebPetAppShop.Helpers;
 using WebPetAppShop.Models;
 
 namespace WebPetAppShop.Controllers
@@ -11,11 +10,13 @@ namespace WebPetAppShop.Controllers
     {
         private readonly ICartRepos cartRepos;
         private readonly IOrderRepos orderRepos;
+        private readonly IMapper mapper;
 
-        public OrderController(ICartRepos cartRepos, IOrderRepos orderRepos)
+        public OrderController(ICartRepos cartRepos, IOrderRepos orderRepos, IMapper mapper)
         {
             this.cartRepos = cartRepos;
             this.orderRepos = orderRepos;
+            this.mapper = mapper;
         }
 
         public IActionResult Index()
@@ -35,7 +36,7 @@ namespace WebPetAppShop.Controllers
 
             var order = new Order
             {
-                UserInfo = userInfo.ToUser(),
+                UserInfo = this.mapper.Map<UserDeliveryInfo>(userInfo), // маппинг моделей
                 Items = existCart.Items,
             };
 
