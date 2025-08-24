@@ -10,10 +10,11 @@ using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db;
 using Microsoft.AspNetCore.Identity;
 using OnlineShop.Db.Model;
-using Microsoft.AspNetCore.Http;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
 
 // получаем строку подключения из файла конфигурации
 string connection = builder.Configuration.GetConnectionString("online_shop");
@@ -29,25 +30,12 @@ builder.Services.AddIdentity<User, IdentityRole>()
                 // устанавливаем тип хранилища - наш контекст
                 .AddEntityFrameworkStores<IdentityContext>();
 
-// настройка cookie
-builder.Services.ConfigureApplicationCookie(options =>
-{
-    options.ExpireTimeSpan = TimeSpan.FromHours(8);
-    options.LoginPath = "/Account/Login";
-    options.LogoutPath = "/Account/Logout";
-    options.Cookie = new CookieBuilder
-    {
-        IsEssential = true
-    };
-});
-
 builder.Services.AddTransient<IProductRepos, ProductDbRepos>();
 builder.Services.AddTransient<ICartRepos, CartDbRepos>();
 builder.Services.AddTransient<IFavoriteRepos, FavoriteDbRepos>();
 builder.Services.AddTransient<IOrderRepos, OrderDbRepos>();
 builder.Services.AddSingleton<IRolesRepos, RolesInMamoryRepos>();
 builder.Services.AddSingleton<IUsersManager, UsersManagerInMamory>();
-builder.Services.AddControllersWithViews();
 
 // сервис локализации
 builder.Services.Configure<RequestLocalizationOptions>(options =>
@@ -85,14 +73,5 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{guid?}");
-
-// инициализация администратора
-using (var serviceScope = app.Services.CreateScope())
-{
-    var services = serviceScope.ServiceProvider;
-    var userManager = services.GetRequiredService<UserManager<User>>();
-    var rolesManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-    IdentityInitializer.Initialize(userManager, rolesManager);
-}
 
 app.Run();

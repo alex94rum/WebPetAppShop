@@ -1,16 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using OnlineShop.Db.Model;
 using System;
 using System.Linq;
+using WebPetAppShop.Data;
 using WebPetAppShop.Helpers;
 using WebPetAppShop.Models;
 
 namespace WebPetAppShop.Areas.Admin.Controllers
 {
-    [Area(Constants.AdminRoleName)]
-    [Authorize(Roles = Constants.AdminRoleName)]
+    [Area("Admin")]
     public class OrderController : Controller
     {
         private readonly IOrderRepos orderRepos;

@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Db;
+﻿using Microsoft.AspNetCore.Mvc;
 using WebPetAppShop.Areas.Admin.Model;
 using WebPetAppShop.Data;
 
 namespace WebPetAppShop.Areas.Admin.Controllers
 {
-    [Area(Constants.AdminRoleName)]
-    [Authorize(Roles = Constants.AdminRoleName)]
+    [Area("Admin")]
     public class RoleController : Controller
     {
         private readonly IRolesRepos rolesRepos;

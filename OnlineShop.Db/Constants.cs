@@ -2,8 +2,8 @@
 {
     public static class Constants
     {
-        public const string UserId = "UserId";
-        public const string AdminRoleName = "Admin";
-        public const string UserRoleName = "User";
+        public static string UserId = "UserId";
+        public static string AdminRoleName = "Admin";
+        public static string UserRoleName = "User";
     }
 }
