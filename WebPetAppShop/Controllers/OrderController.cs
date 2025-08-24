@@ -31,7 +31,7 @@ namespace WebPetAppShop.Controllers
                 return View(nameof(Index), userInfo);
             }
 
-            var existCart = this.cartRepos.TyGetByUserId(Constants.UserId);
+            var existCart = this.cartRepos.TyGetByUserId(Constans.UserId);
 
             var order = new Order
             {
@@ -44,7 +44,7 @@ namespace WebPetAppShop.Controllers
                 this.orderRepos.Add(order);
             }
 
-            this.cartRepos.Clear(Constants.UserId);
+            this.cartRepos.Clear(Constans.UserId);
 
             return View(nameof(Buy));
         }

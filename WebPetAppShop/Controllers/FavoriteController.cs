@@ -18,21 +18,21 @@ public class FavoriteController : Controller
 
     public IActionResult Index()
     {
-        var products = this.favoriteRepos.GetAll(Constants.UserId);
+        var products = this.favoriteRepos.GetAll(Constans.UserId);
         return View(products.ToProductsViewModel());
     }
 
     public IActionResult Add(Guid productId)
     {
         var product = this.productRepos.TryByGuid(productId);
-        this.favoriteRepos.Add(Constants.UserId, product);
+        this.favoriteRepos.Add(Constans.UserId, product);
 
         return RedirectToAction(nameof(Index));
     }
 
     public IActionResult Remove(Guid productId)
     {
-        this.favoriteRepos.Remove(Constants.UserId, productId);
+        this.favoriteRepos.Remove(Constans.UserId, productId);
 
         return RedirectToAction(nameof(Index));
     }

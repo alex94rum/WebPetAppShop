@@ -14,7 +14,7 @@ namespace WebPetAppShop.Views.Shared.Components.FavoriteProductsCount
 
         public IViewComponentResult Invoke()
         {
-            var producCounts = this.favoriteRepos.GetAll(Constants.UserId).Count;
+            var producCounts = this.favoriteRepos.GetAll(Constans.UserId).Count;
 
             return View("FavoriteProductsCount", producCounts);
         }
