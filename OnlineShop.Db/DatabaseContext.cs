@@ -28,7 +28,7 @@ namespace OnlineShop.Db
                 new Product()
                 {
                     Id = new Guid("6498025C-CEC5-43E5-8740-403FC45E9396"),
-                    Name = "КУср по C#",
+                    Name = "Курс по C#",
                     Cost = 100,
                     Description = "Описание курса по C#",
                     ImagePath = "/images/c-sharp.png",
@@ -37,7 +37,7 @@ namespace OnlineShop.Db
                 new Product()
                 {
                     Id = new Guid("064F9892-393B-4B1B-85A5-BA611ACD90DF"),
-                    Name = "КУср по Java",
+                    Name = "Курс по Java",
                     Cost = 99,
                     Description = "Описание курса по Java",
                     ImagePath = "/images/java.png",
